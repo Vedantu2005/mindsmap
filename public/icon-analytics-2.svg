@@ -1,0 +1,12 @@
+<svg width="88" height="89" viewBox="0 0 88 89" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M53.6822 80.99H10.0002C5.58189 80.99 2.00017 77.4083 2.00017 72.99V14.8423C2.00017 10.424 5.5819 6.84225 10.0002 6.84225H66.4434C70.8616 6.84225 74.4434 10.424 74.4434 14.8423L74.4434 59.7403" stroke="#92C9EC" stroke-linecap="round"/>
+<line x1="0.5" y1="-0.5" x2="71.9432" y2="-0.5" transform="matrix(-1 0 0 1 74.4434 21.3307)" stroke="#92C9EC" stroke-linecap="round"/>
+<circle r="1.35542" transform="matrix(-1 0 0 1 66.6084 14.5227)" fill="#92C9EC"/>
+<circle r="1.35542" transform="matrix(-1 0 0 1 61.1866 14.5227)" fill="#92C9EC"/>
+<circle r="1.35542" transform="matrix(-1 0 0 1 55.7657 14.5227)" fill="#92C9EC"/>
+<path d="M69.3193 74.6135L49.4398 48.4087L29.5603 66.0292L13.747 36.6617" stroke="#92C9EC"/>
+<circle r="5.8253" transform="matrix(-1 0 0 1 70.6747 75.5172)" fill="white" stroke="#92C9EC"/>
+<circle r="5.8253" transform="matrix(-1 0 0 1 48.9882 48.4089)" fill="white" stroke="#92C9EC"/>
+<circle r="5.8253" transform="matrix(-1 0 0 1 30.0116 65.5774)" fill="white" stroke="#92C9EC"/>
+<circle r="5.8253" transform="matrix(-1 0 0 1 13.747 36.6617)" fill="white" stroke="#92C9EC"/>
+</svg>
