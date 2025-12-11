@@ -4,15 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./Pages/Home";
 import BlogPage from "./Pages/BlogPage";
-import BlogDetail1 from "./components/BlogDetail1";
-import BlogDetail2 from "./components/BlogDetail2";
-import BlogDetail3 from "./components/BlogDetail3";
-import BlogDetail4 from "./components/BlogDetail4";
-import BlogDetail5 from "./components/BlogDetail5";
-import BlogDetail6 from "./components/BlogDetail6";
-import BlogDetail7 from "./components/BlogDetail7";
-import BlogDetail8 from "./components/BlogDetail8";
-import BlogDetail9 from "./components/BlogDetail9";
+// Removed static BlogDetail imports to use the dynamic one exclusively
 import BlogDetailDynamic from './Pages/BlogDetailDynamic';
 
 import AdminLogin from "./Pages/admin/Login";
@@ -77,7 +69,6 @@ const App = () => {
   const isAdminRoute = location.pathname.startsWith("/admin");
   return (
     <>
-      {/* Your current structure is great and doesn't need to change */}
       <div className="flex flex-col min-h-screen">
         {!isAdminRoute && <Navbar />}
         <main className="flex-grow">
@@ -86,7 +77,13 @@ const App = () => {
             <Route path="/" element={<Home />} />
 
             <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:slug" element={<BlogDetailDynamic />} />
+            
+            {/* This DYNAMIC route now handles ALL blog posts. 
+              It matches any URL like /blog/some-title 
+              and passes "some-title" as the slug to BlogDetailDynamic 
+            */}
+            <Route path="/blog/:id" element={<BlogDetailDynamic />} />
+            
             <Route path="/about-us" element={<About />} />
             <Route path="/partnerships" element={<Partner />} />
             <Route path="/contact" element={<Contact />} />
@@ -171,26 +168,6 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-
-            {/* 2. Add a route for each individual blog post */}
-            <Route
-              path="/blog/enterprise-ai-solutions"
-              element={<BlogDetail1 />}
-            />
-            <Route path="/blog/ai-agents-explained" element={<BlogDetail2 />} />
-            <Route
-              path="/blog/automated-machine-learning"
-              element={<BlogDetail3 />}
-            />
-            <Route path="/blog/iot-ai-analytics" element={<BlogDetail4 />} />
-            <Route
-              path="/blog/companies-using-generative-ai"
-              element={<BlogDetail5 />}
-            />
-            <Route path="/blog/ai-in-healthcare" element={<BlogDetail6 />} />
-            <Route path="/blog/ai-in-finance" element={<BlogDetail7 />} />
-            <Route path="/blog/ai-ethics" element={<BlogDetail8 />} />
-            <Route path="/blog/beginners-guide-nlp" element={<BlogDetail9 />} />
           </Routes>
         </main>
         {!isAdminRoute && <Footer />}

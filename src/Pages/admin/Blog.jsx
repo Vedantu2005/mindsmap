@@ -214,7 +214,6 @@ const BlogManager = ({ setIsAdminLoggedIn }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // --- UPDATED DELETE FUNCTION ---
   const handleDelete = async (id) => {
     // 1. Check if user is authenticated
     if (!auth.currentUser) {
@@ -630,7 +629,8 @@ const BlogManager = ({ setIsAdminLoggedIn }) => {
                     {/* Read More Link */}
                     <div className="mt-auto">
                       <Link
-                        to={`/blog/${blog.slug}`}
+                        // UPDATED: Now points to the ID instead of slug
+                        to={`/blog/${blog.id}`} 
                         className="inline-flex items-center gap-2 text-orange-600 font-bold text-sm hover:gap-3 transition-all group/link"
                       >
                         Read More

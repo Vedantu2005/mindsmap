@@ -175,15 +175,18 @@ const BlogPage = () => {
             </div>
           )}
 
-          {!loading && blogs.map((post) => (
-            <BlogCard key={post.id} post={{
-              date: post.date || '',
-              title: post.title || 'Untitled',
-              description: (post.content || '').replace(/<[^>]*>/g, '').substring(0, 180),
-              image: post.imageUrl || '/blog1.webp',
-              href: `/blog/${post.slug || post.id}`
-            }} />
-          ))}
+         
+
+{!loading && blogs.map((post) => (
+  <BlogCard key={post.id} post={{
+    date: post.date || '',
+    title: post.title || 'Untitled',
+    description: (post.content || '').replace(/<[^>]*>/g, '').substring(0, 180),
+    image: post.imageUrl || '/blog1.webp',
+    // CHANGE THIS LINE:
+    href: `/blog/${post.id}`
+  }} />
+))}
         </div>
       </div>
     </div>
