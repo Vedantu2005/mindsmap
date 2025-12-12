@@ -406,7 +406,7 @@ const Navbar = () => {
     { text: "About", hasDropdown: true, menuKey: "about" },
     { text: "Services", hasDropdown: true, menuKey: "services" },
     { text: "Solutions", hasDropdown: true, menuKey: "solutions" },
-    { text: "Demo's", hasDropdown: true, menuKey: "industries" },
+    { text: "Industries", hasDropdown: true, menuKey: "industries" }, // Changed from Demo's
     { text: "Blog", hasDropdown: false, href: "/blog" },
   ];
   const handleMenuEnter = (menuKey) => {
