@@ -28,44 +28,43 @@ const Blog = () => {
       date: '23 JULY 2024',
       title: 'Benefits of automated machine learning for your organization',
       image: '/blog1.webp',
-      // Added dummy IDs for fallback posts so links don't crash, though they won't load real data
       id: 'fallback-1', 
-      href: '/blog/automated-machine-learning',
+      slug: 'benefits-of-automated-machine-learning-for-your-organization', // Added slug for fallback
     },
     {
       date: '18 JULY 2024',
       title: 'IoT artificial intelligence analytics: Benefits, challenges, and trends',
       image: '/blog2.webp',
       id: 'fallback-2',
-      href: '/blog/iot-ai-analytics',
+      slug: 'iot-artificial-intelligence-analytics-benefits-challenges-and-trends', // Added slug for fallback
     },
     {
       date: '16 JULY 2024',
       title: '15 companies using generative AI for business efficiency',
       image: '/blog3.webp',
       id: 'fallback-3',
-      href: '/blog/companies-using-generative-ai',
+      slug: '15-companies-using-generative-ai-for-business-efficiency', // Added slug for fallback
     },
      {
       date: '1 AUGUST 2024',
       title: 'Most alarming AI ethical issues: How to develop ethical AI?',
       image: '/blog4.webp',
       id: 'fallback-4',
-      href: '/blog/ai-ethics',
+      slug: 'most-alarming-ai-ethical-issues-how-to-develop-ethical-ai', // Added slug for fallback
     },
     {
       date: '30 JULY 2024',
       title: 'Enterprise AI development solutions: The key to business transformation',
       image: '/blog5.webp',
       id: 'fallback-5',
-      href: '/blog/enterprise-ai-solutions',
+      slug: 'enterprise-ai-development-solutions-the-key-to-business-transformation', // Added slug for fallback
     },
     {
       date: '25 JULY 2024',
       title: 'AI agents: Examples, functions, applications, future trends',
       image: '/blog6.webp',
       id: 'fallback-6',
-      href: '/blog/ai-agents-explained',
+      slug: 'ai-agents-examples-functions-applications-future-trends', // Added slug for fallback
     },
   ];
 
@@ -121,9 +120,9 @@ const Blog = () => {
                 <div key={post.id || index} className="shrink-0 w-full md:w-1/3 px-3">
                   <div className="bg-white rounded-xl border border-gray-200/80 shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden text-left h-full flex flex-col group">
                     
-                    {/* UPDATED: Wrapped Image in Link */}
+                    {/* Change 1: Link uses the dynamic slug path: /blog/:slug */}
                     <div className="overflow-hidden">
-                      <Link to="/blogdetailspage" state={{ id: post.id }}>
+                      <Link to={`/blog/${post.slug || post.id}`}>
                         <img
                           src={post.imageUrl || post.image}
                           alt={post.title}
@@ -135,17 +134,16 @@ const Blog = () => {
                     <div className="p-6 grow flex flex-col">
                       <p className="text-sm text-gray-500 uppercase tracking-wider">{post.date}</p>
                       
-                      {/* UPDATED: Wrapped Title in Link */}
+                      {/* Change 2: Title link uses the dynamic slug path */}
                       <h3 className="mt-2 text-lg font-semibold text-gray-900 grow leading-snug">
-                         <Link to="/blogdetailspage" state={{ id: post.id }} className="hover:text-cyan-600 transition-colors">
+                         <Link to={`/blog/${post.slug || post.id}`} className="hover:text-cyan-600 transition-colors">
                            {post.title}
                          </Link>
                       </h3>
 
-                      {/* UPDATED: Read More Link Logic */}
+                      {/* Change 3: Read More link uses the dynamic slug path */}
                       <Link 
-                        to="/blogdetailspage" 
-                        state={{ id: post.id }} 
+                        to={`/blog/${post.slug || post.id}`}
                         className="mt-4 text-cyan-600 font-semibold hover:text-cyan-700 self-start inline-flex items-center group"
                       >
                         Read More

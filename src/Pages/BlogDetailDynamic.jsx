@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // Updated imports
-import { doc, getDoc } from 'firebase/firestore'; 
+// Changed imports: use `useParams` instead of `useLocation`
+import { useParams, useNavigate } from 'react-router-dom'; 
+// Updated Firestore imports for querying by slug field
+import { collection, query, where, getDocs, limit } from 'firebase/firestore'; 
 import { db } from '../config/firebase';
 
 const BlogDetailDynamic = () => {
-  const location = useLocation();
+  // Use useParams to get the slug from the URL
+  const { slug } = useParams();
   const navigate = useNavigate();
   
-  // 1. Get the ID from the state passed via the Link component
-  const id = location.state?.id;
-
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // 2. Redirect back to blog page if someone refreshes and state is lost
-    if (!id) {
+    // Redirect back to blog page if slug is missing from URL (e.g., accessed /blog/ directly)
+    if (!slug) {
       navigate('/blog');
       return;
     }
@@ -24,11 +24,23 @@ const BlogDetailDynamic = () => {
     async function fetchBlog() {
       setLoading(true);
       try {
-        const docRef = doc(db, 'blogs', id);
-        const docSnap = await getDoc(docRef);
+        // This requires your blog documents in Firestore to have a 'slug' field.
         
-        if (docSnap.exists()) {
-          setBlog({ id: docSnap.id, ...docSnap.data() });
+        const blogsCollection = collection(db, 'blogs');
+        
+        // Create the query to find the document by the 'slug' field
+        const q = query(
+          blogsCollection, 
+          where('slug', '==', slug), // Find documents where slug matches URL parameter
+          limit(1) // Only expect one result
+        );
+        
+        const querySnapshot = await getDocs(q);
+        
+        if (!querySnapshot.empty) {
+          // Get the first (and only) document
+          const docSnap = querySnapshot.docs[0]; 
+          setBlog({ id: docSnap.id, ...docSnap.data() }); 
         } else {
           setError('Blog not found.');
         }
@@ -41,9 +53,9 @@ const BlogDetailDynamic = () => {
     }
 
     fetchBlog();
-  }, [id, navigate]);
+  }, [slug, navigate]); // Dependency changed from id to slug
 
-  if (!id) return null; // Prevent flash before redirect
+  if (!slug || loading) return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">Loading...</div>;
   if (error) return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-red-600">{error}</div>;
   if (!blog) return null;
 
