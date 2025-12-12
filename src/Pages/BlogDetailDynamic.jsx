@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore'; // Changed imports
+import { useLocation, useNavigate } from 'react-router-dom'; // Updated imports
+import { doc, getDoc } from 'firebase/firestore'; 
 import { db } from '../config/firebase';
 
 const BlogDetailDynamic = () => {
-  const { id } = useParams(); // Get 'id' instead of 'slug'
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // 1. Get the ID from the state passed via the Link component
+  const id = location.state?.id;
+
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
+    // 2. Redirect back to blog page if someone refreshes and state is lost
+    if (!id) {
+      navigate('/blog');
+      return;
+    }
+
     async function fetchBlog() {
       setLoading(true);
       try {
-        // Fetch document directly by ID
         const docRef = doc(db, 'blogs', id);
         const docSnap = await getDoc(docRef);
         
@@ -30,21 +40,39 @@ const BlogDetailDynamic = () => {
       }
     }
 
-    if (id) fetchBlog();
-  }, [id]);
+    fetchBlog();
+  }, [id, navigate]);
 
+  if (!id) return null; // Prevent flash before redirect
   if (error) return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-red-600">{error}</div>;
   if (!blog) return null;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="bg-white rounded-xl p-8 shadow">
-        <div className="mb-4 text-sm text-slate-500">{blog.date} • {blog.author}</div>
-        <h1 className="text-3xl font-bold mb-6">{blog.title}</h1>
+      <div className="bg-white rounded-xl p-8 shadow-sm">
+        
+        {/* Header Info */}
+        <div className="mb-6 border-b pb-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">{blog.title}</h1>
+            <div className="text-sm text-slate-500 font-medium">
+                {blog.date} • <span className="text-blue-600">{blog.author}</span>
+            </div>
+        </div>
+
+        {/* Large Attractive Feature Image */}
         {blog.imageUrl && (
-          <img src={blog.imageUrl} alt={blog.title} className="w-[400px] h-[300px] object-cover rounded-lg mb-6" />
+          <div className="w-full mb-8 relative group">
+             <img 
+                src={blog.imageUrl} 
+                alt={blog.title} 
+                className="w-full h-64 md:h-[500px] object-cover rounded-2xl shadow-lg transition-transform duration-500 hover:shadow-xl" 
+             />
+          </div>
         )}
-        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: blog.content }} />
+
+        {/* Blog Content */}
+        <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: blog.content }} />
+      
       </div>
     </div>
   );

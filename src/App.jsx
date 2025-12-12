@@ -78,11 +78,8 @@ const App = () => {
 
             <Route path="/blog" element={<BlogPage />} />
             
-            {/* This DYNAMIC route now handles ALL blog posts. 
-              It matches any URL like /blog/some-title 
-              and passes "some-title" as the slug to BlogDetailDynamic 
-            */}
-            <Route path="/blog/:id" element={<BlogDetailDynamic />} />
+            
+            <Route path="/blogdetailspage" element={<BlogDetailDynamic />} />
             
             <Route path="/about-us" element={<About />} />
             <Route path="/partnerships" element={<Partner />} />

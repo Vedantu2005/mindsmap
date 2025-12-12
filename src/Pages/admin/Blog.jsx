@@ -5,7 +5,6 @@ import {
   Trash2,
   Image as ImageIcon,
   Calendar,
-  ArrowRight,
   Upload,
   X,
   Bold,
@@ -625,21 +624,6 @@ const BlogManager = ({ setIsAdminLoggedIn }) => {
                       style={{ unicodeBidi: "plaintext" }}
                       dangerouslySetInnerHTML={{ __html: blog.content }}
                     />
-
-                    {/* Read More Link */}
-                    <div className="mt-auto">
-                      <Link
-                        // UPDATED: Now points to the ID instead of slug
-                        to={`/blog/${blog.id}`} 
-                        className="inline-flex items-center gap-2 text-orange-600 font-bold text-sm hover:gap-3 transition-all group/link"
-                      >
-                        Read More
-                        <ArrowRight
-                          size={16}
-                          className="transition-transform"
-                        />
-                      </Link>
-                    </div>
                   </div>
                 </div>
               ))}
