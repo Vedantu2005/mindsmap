@@ -54,7 +54,7 @@ const BlogDetailDynamic = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="bg-white rounded-xl p-8 shadow-sm">
         
-        {/* Header Info - KEPT AS IS */}
+        {/* Header Info */}
         <div className="mb-6 border-b pb-4">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">{blog.title}</h1>
             <div className="text-sm text-slate-500 font-medium">
@@ -62,7 +62,7 @@ const BlogDetailDynamic = () => {
             </div>
         </div>
 
-        {/* Large Attractive Feature Image - KEPT AS IS */}
+        {/* Feature Image */}
         {blog.imageUrl && (
           <div className="w-full mb-8 relative group">
              <img 
@@ -73,16 +73,16 @@ const BlogDetailDynamic = () => {
           </div>
         )}
 
-        {/* Blog Content - UPDATED WITH STYLING CLASSES */}
-        {/* I added the specific [&_h1], [&_ul] classes here. 
-            This forces the HTML inside to render with the correct sizes and styles. 
-        */}
+        {/* Blog Content */}
+        {/* Updated h6 style: Removed uppercase, set size to text-sm */}
         <div 
             className="prose prose-lg max-w-none text-gray-700 leading-relaxed
                 [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:text-gray-900 [&_h1]:mb-6 [&_h1]:mt-10
                 [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mb-4 [&_h2]:mt-8
                 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:text-gray-900 [&_h3]:mb-3 [&_h3]:mt-6
                 [&_h4]:text-xl [&_h4]:font-bold [&_h4]:text-gray-900 [&_h4]:mb-2
+                [&_h5]:text-lg [&_h5]:font-bold [&_h5]:text-gray-900 [&_h5]:mb-2
+                [&_h6]:text-sm [&_h6]:font-bold [&_h6]:text-gray-900 [&_h6]:mb-1
                 [&_p]:mb-6 [&_p]:text-lg [&_p]:leading-8
                 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6
                 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-6

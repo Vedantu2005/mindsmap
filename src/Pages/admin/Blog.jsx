@@ -523,7 +523,7 @@ const BlogManager = ({ setIsAdminLoggedIn }) => {
                           />
                         </div>
 
-                        {/* Editor with VISUAL STYLES */}
+                        {/* Editor with h6 fixed */}
                         <div
                           ref={editorRef}
                           contentEditable
@@ -543,11 +543,15 @@ const BlogManager = ({ setIsAdminLoggedIn }) => {
                               });
                             }
                           }}
+                          // Updated styles for h6: removed uppercase, set to text-sm
                           className="w-full min-h-[300px] px-4 py-3 bg-white text-slate-800 font-sans text-sm leading-relaxed overflow-y-auto max-w-none focus:outline-none
                             [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:mb-4 [&_h1]:text-slate-900
                             [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mb-3 [&_h2]:text-slate-800
                             [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mb-2 [&_h3]:text-slate-800
                             [&_h4]:text-xl [&_h4]:font-bold [&_h4]:mb-2
+                            [&_h5]:text-lg [&_h5]:font-bold [&_h5]:mb-2
+                            [&_h6]:text-sm [&_h6]:font-bold [&_h6]:mb-1
+                            [&_p]:mb-4 [&_p]:text-sm
                             [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-4
                             [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-4
                             [&_li]:mb-1
@@ -631,13 +635,16 @@ const BlogManager = ({ setIsAdminLoggedIn }) => {
                       {blog.title}
                     </h3>
                     
-                    {/* UPDATED: Added the same classes here so the preview looks correct.
-                       NOTE: line-clamp-3 will hide most of it, but what shows will be styled.
-                    */}
+                    {/* Preview Styling */}
                     <div
                       className="text-slate-600 text-sm leading-relaxed mb-6 line-clamp-3 flex-1 
                         [&_h1]:text-lg [&_h1]:font-bold 
                         [&_h2]:text-base [&_h2]:font-bold 
+                        [&_h3]:text-base [&_h3]:font-bold
+                        [&_h4]:text-sm [&_h4]:font-bold
+                        [&_h5]:text-sm [&_h5]:font-bold
+                        [&_h6]:text-xs [&_h6]:font-bold
+                        [&_p]:mb-1
                         [&_ul]:list-disc [&_ul]:pl-5
                         [&_ol]:list-decimal [&_ol]:pl-5"
                       style={{ unicodeBidi: "plaintext" }}
