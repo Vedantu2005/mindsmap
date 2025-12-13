@@ -3,13 +3,6 @@ import { Link } from 'react-router-dom';
 import { collection, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
-// Helper to strip HTML tags for the preview text
-const stripHtml = (html) => {
-  if (!html) return "";
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  return doc.body.textContent || "";
-};
-
 const Arrow = ({ direction, onClick, disabled }) => (
   <button
     onClick={onClick}
@@ -52,7 +45,8 @@ const Blog = () => {
         return {
             id: doc.id,
             ...data,
-            description: stripHtml(data.content).substring(0, 120) + "..." 
+            // Updated: Use full content to preserve formatting
+            description: data.content 
         };
       });
       setBlogs(fetchedBlogs);
@@ -125,9 +119,11 @@ const Blog = () => {
                          </Link>
                       </h3>
 
-                      <p className="text-gray-600 text-sm line-clamp-3 mb-4 flex-grow">
-                        {post.description}
-                      </p>
+                      {/* Updated: Render HTML directly */}
+                      <div 
+                        className="text-gray-600 text-sm line-clamp-3 mb-4 flex-grow"
+                        dangerouslySetInnerHTML={{ __html: post.description }}
+                      />
 
                       <Link 
                         to={`/blog/${post.slug}`}

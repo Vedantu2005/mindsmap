@@ -4,13 +4,6 @@ import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../config/firebase'; // Ensure this path matches your folder structure
 import { ArrowRight, Search } from 'lucide-react';
 
-// Helper to strip HTML tags for the preview text
-const stripHtml = (html) => {
-  if (!html) return "";
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  return doc.body.textContent || "";
-};
-
 const BlogCard = ({ post }) => (
   <div className="bg-white rounded-lg border border-gray-200/80 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden text-left h-full flex flex-col group">
     <div className="overflow-hidden h-56 relative">
@@ -39,9 +32,12 @@ const BlogCard = ({ post }) => (
           {post.title}
         </Link>
       </h3>
-      <p className="text-gray-600 text-sm line-clamp-3 mb-4 flex-grow">
-        {post.description}
-      </p>
+      
+      {/* Updated: Render HTML content directly */}
+      <div 
+        className="text-gray-600 text-sm line-clamp-3 mb-4 flex-grow"
+        dangerouslySetInnerHTML={{ __html: post.description }}
+      />
       
       <Link 
         to={`/blog/${post.slug}`} 
@@ -72,8 +68,9 @@ const BlogPage = () => {
           return {
             id: doc.id,
             ...data,
-            // Create a clean plain-text snippet from the rich HTML content
-            description: stripHtml(data.content).substring(0, 150) + "..." 
+            // Updated: Pass full content to preserve admin formatting
+            // CSS line-clamp will handle the visual truncation
+            description: data.content 
           };
         });
         setBlogs(docs);
